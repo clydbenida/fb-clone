@@ -2,9 +2,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Login from './components/Login'
+import Login from './components/Authentication/Login'
 import Newsfeed from './components/Newsfeed'
 import { AuthProvider, useAuth } from './context/AuthContext'
+import PrivateRoute from './components/Authentication/PrivateRoute'
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
       <div>
         <Router>
           <Switch>
-            <Route exact path="/" component={Newsfeed} />
+            <PrivateRoute exact path="/" component={Newsfeed} />
             <Route path="/login" component={Login} />
           </Switch>
         </Router>

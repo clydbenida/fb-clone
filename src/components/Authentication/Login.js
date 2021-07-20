@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { Container, Row, Col, Card, Form, Alert } from 'react-bootstrap'
+import { Container, Row, Col, Card, Form, Alert, Button } from 'react-bootstrap'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 
-import fbLogo from '../assets/fb-logo.svg'
+import fbLogo from '../../assets/fb-logo.svg'
 
 import SignUpModal from './SignUpModal'
-import { useAuth } from '../context/AuthContext'
+import ForgotPasswordModal from './ForgotPasswordModal'
+import { useAuth } from '../../context/AuthContext'
 
 const LoginCard = styled(Card)`
    width: 70%;
@@ -23,6 +24,7 @@ const SignUpButton = styled.a`
 
 const Login = () => {
    const [ showSignup, setShowSignup ] = useState(false)
+   const [ showForgotPassword, setShowForgotPassword ] = useState(false)
    const [ error, setError ] = useState('')
    const [ loading, setLoading ] = useState(false) 
    const emailRef = useRef()
@@ -69,7 +71,7 @@ const Login = () => {
                                        <input ref={passwordRef} type="password" className="form-control" placeholder="Password" />
                                     </Form.Group>
                                     <button className="btn btn-primary btn-lg w-100">Log In</button>
-                                    <a href="#" className="text-decoration-none py-2 d-inline-block"><small>Forgot Password?</small></a>
+                                    <a href="#" onClick={() => setShowForgotPassword(true)} className="text-decoration-none py-2 d-inline-block"><small>Forgot Password?</small></a>
                                     <hr className="my-4" />
                                     <SignUpButton className="btn btn-success py-3 px-4" onClick={() => setShowSignup(true)}>
                                        <h5 className="my-0">Create New Account</h5>
@@ -84,6 +86,7 @@ const Login = () => {
             </Row>
          </Container>
          <SignUpModal show={showSignup} handleClose={() => setShowSignup(false)} />
+         <ForgotPasswordModal show={showForgotPassword} handleClose={() => setShowForgotPassword(false)} />
       </>
    );
 }

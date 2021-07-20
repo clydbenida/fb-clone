@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Form, Modal, Alert } from 'react-bootstrap'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 
 const SignUpModal = ({show, handleClose}) => {
    const emailRef = useRef()
