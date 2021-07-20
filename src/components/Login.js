@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, Form, Modal } from 'react-bootstrap'
+import React, { useState, useRef } from 'react';
+import { Container, Row, Col, Card, Form, Alert } from 'react-bootstrap'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 import fbLogo from '../assets/fb-logo.svg'
 
 import SignUpModal from './SignUpModal'
+import { useAuth } from '../context/AuthContext'
 
 const LoginCard = styled(Card)`
    width: 70%;
@@ -21,6 +23,29 @@ const SignUpButton = styled.a`
 
 const Login = () => {
    const [ showSignup, setShowSignup ] = useState(false)
+   const [ error, setError ] = useState('')
+   const [ loading, setLoading ] = useState(false) 
+   const emailRef = useRef()
+   const passwordRef = useRef()
+   const { login } = useAuth()
+
+   const history = useHistory()
+
+   const handleSubmit = async (e) => {
+      e.preventDefault()
+
+      try {
+         setError('')
+         setLoading(true)
+         await login(emailRef.current.value, passwordRef.current.value)
+         history.push('/')
+      } catch (err) {
+         console.log(err)
+         setError('Failed to Login')
+      }
+      setLoading(false)
+   }
+
    return (
       <>
          <Container>
@@ -35,12 +60,13 @@ const Login = () => {
                         <Col lg={6} md={12}>
                            <LoginCard className="py-2" style={{margin: "0 auto"}}>
                               <Card.Body>
-                                 <Form className="text-center">
+                                 <Form className="text-center" onSubmit={handleSubmit}>
+                                    {error && (<Alert variant="danger">{error}</Alert>)}
                                     <Form.Group className="my-3">
-                                       <input type="text" className="form-control" placeholder="Email or Phone Number" />
+                                       <input ref={emailRef} type="text" className="form-control" placeholder="Email or Phone Number" />
                                     </Form.Group>
                                     <Form.Group className="my-3">
-                                       <input type="password" className="form-control" placeholder="Password" />
+                                       <input ref={passwordRef} type="password" className="form-control" placeholder="Password" />
                                     </Form.Group>
                                     <button className="btn btn-primary btn-lg w-100">Log In</button>
                                     <a href="#" className="text-decoration-none py-2 d-inline-block"><small>Forgot Password?</small></a>
