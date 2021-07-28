@@ -7,7 +7,7 @@
 }
 
 body {
-   background-color: #fbfbfe;
+   background-color: #d2d2dd;
 }
 
 .form-control {
@@ -16,4 +16,11 @@ body {
 
 hr {
    border: 1px solid #9f9f9f;
+}
+
+.post-card {
+   background-color: white;
+   padding: 1em;
+   border-radius: 1em;
+   box-shadow: 0px 0px 5px #0000003f;
 }
