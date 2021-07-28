@@ -4,6 +4,8 @@ import { useAuth } from '../../context/AuthContext'
 
 const ForgotPasswordModal = ({ show, handleClose }) => {
    const [ error, setError ] = useState('')
+   const [ message, setMessage ] = useState('')
+   const [ loading, setLoading ] = useState(false)
    const { resetPassword } = useAuth()
    const emailRef = useRef()
 
@@ -12,6 +14,7 @@ const ForgotPasswordModal = ({ show, handleClose }) => {
 
       try {
          await resetPassword(emailRef.current.value)
+         setMessage('Reset password link sent! Check your inbox for further instructions.')
       } catch (err) {
          setError('Something went wrong')
          console.log(err)
@@ -21,13 +24,14 @@ const ForgotPasswordModal = ({ show, handleClose }) => {
    return (
       <Modal show={show} onHide={handleClose}>
          <Modal.Header>
-            <h2>Forgot Password</h2>
+            <h2>Reset Your Password</h2>
          </Modal.Header>
          <Modal.Body>
             {error && (<Alert variant="danger">{error}</Alert>)}
+            {message && (<Alert variant="success">{message}</Alert>)}
             <Form onSubmit={handleSubmit}>
                <Form.Control ref={emailRef} type="email" placeholder="Email" />
-               <button className="btn btn-primary w-100 my-3">Send Link</button>
+               <button disabled={loading} className="btn btn-primary w-100 my-3">Send Link</button>
             </Form>
          </Modal.Body>
       </Modal>
