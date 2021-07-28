@@ -29,7 +29,7 @@ const HeaderNav = () => {
          return setEmail(currentUser.email)
       else
          return setEmail('No user')
-   }, [])
+   }, [currentUser])
 
    const handleLogout = async (e) => {
       try {
@@ -44,14 +44,16 @@ const HeaderNav = () => {
 
    return (
       <>
-         <CustomNavbar expand="lg" className="py-0">
-            <Container fluid>
-               <Navbar.Brand><img src={fbLogoBadge} width="50" alt="f Badge" /></Navbar.Brand>
-               <Form>
-                  <SearchBox type="text" placeholder="Search Facebook" />
-               </Form>
-               <Navbar.Toggle aria-controls="basic-navbar-nav" />
-               <Navbar.Collapse id="basic-navbar-nav">
+         <nav className="d-flex align-items-center position-fixed top-0 start-0 mx-3" style={{zIndex: 6}}>
+            <Navbar.Brand><img src={fbLogoBadge} width="40" alt="f Badge" /></Navbar.Brand>
+            <Form>
+               <SearchBox type="text" placeholder="Search Facebook" />
+            </Form>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" /> 
+         </nav>
+         <CustomNavbar expand="lg" className="py-0 position-fixed w-100 py-1 mb-5">
+            <Container fluid className="justify-content-between align-items-center">
+               <Navbar.Collapse id="basic-navbar-nav" className="flex-grow-0 my-0 mx-auto">
                   <Nav>
                      <Nav.Link>Newsfeed</Nav.Link>
                      <Nav.Link>Watch</Nav.Link>
@@ -60,13 +62,12 @@ const HeaderNav = () => {
                      <Nav.Link>Gaming</Nav.Link>
                   </Nav>
                </Navbar.Collapse>
-         
-               <Nav className="d-flex flex-row justify-content-between">
-                  <Nav.Link>{email}</Nav.Link>
-                  <Nav.Link onClick={handleLogout}>Log out</Nav.Link>
-               </Nav>
             </Container>
          </CustomNavbar>
+         <Nav className="d-flex flex-row justify-content-between position-fixed top-0 end-0 py-2" style={{zIndex: 6}}>
+            <Nav.Link>{email}</Nav.Link>
+            <Nav.Link onClick={handleLogout}>Log out</Nav.Link>
+         </Nav>
          {error && (<Alert variant="danger">{error}</Alert>)}
       </>
    );

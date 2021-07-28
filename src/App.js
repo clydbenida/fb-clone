@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Login from './components/Authentication/Login'
 import Newsfeed from './components/Newsfeed'
-import { AuthProvider, useAuth } from './context/AuthContext'
+import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/Authentication/PrivateRoute'
 
 const App = () => {
