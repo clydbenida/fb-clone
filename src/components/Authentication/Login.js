@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Container, Row, Col, Card, Form, Alert, Button } from 'react-bootstrap'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
 
 import fbLogo from '../../assets/fb-logo.svg'
 
@@ -29,7 +29,7 @@ const Login = () => {
    const [ loading, setLoading ] = useState(false) 
    const emailRef = useRef()
    const passwordRef = useRef()
-   const { login } = useAuth()
+   const { login, currentUser } = useAuth()
 
    const history = useHistory()
 
@@ -47,9 +47,10 @@ const Login = () => {
       }
       setLoading(false)
    }
-
    return (
+      
       <>
+      {!currentUser ? (
          <Container>
             <Row className="flex-column justify-content-around" style={{height: "100vh"}}>
                <Col md={9} className="w-100" style={{height: "max-content"}}>
@@ -85,6 +86,7 @@ const Login = () => {
                </Col>
             </Row>
          </Container>
+      ) : (<Redirect to="/" />)}
          <SignUpModal show={showSignup} handleClose={() => setShowSignup(false)} />
          <ForgotPasswordModal show={showForgotPassword} handleClose={() => setShowForgotPassword(false)} />
       </>
