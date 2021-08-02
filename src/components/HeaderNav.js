@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Nav, Navbar, Container, Form, Alert } from 'react-bootstrap'
+import { AiOutlineHome, AiFillShop } from 'react-icons/ai'
+import { FaTv } from 'react-icons/fa'
+import { RiGamepadLine, RiGroupLine } from 'react-icons/ri'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 
@@ -9,6 +12,7 @@ import fbLogoBadge from '../assets/fb-logo-badge.svg'
 
 const CustomNavbar = styled(Navbar)`
    background-color: white;
+   color: #1f1f1f;
    box-shadow: 0px 0px 8px #afafaf
 `
 
@@ -16,6 +20,13 @@ const SearchBox = styled(Form.Control)`
    border-radius: 1em;
    border: none;
    background-color: #f1f1f1;
+`
+
+const HeaderIcons = styled(Nav.Link)`
+   border-radius: .25em;
+   :hover {
+      background-color: #efefef;
+   }
 `
 
 
@@ -41,6 +52,7 @@ const HeaderNav = () => {
          console.log(err)
       }
    }
+   const headerIconSize = 32
 
    return (
       <>
@@ -55,11 +67,11 @@ const HeaderNav = () => {
             <Container fluid className="justify-content-between align-items-center">
                <Navbar.Collapse id="basic-navbar-nav" className="flex-grow-0 my-0 mx-auto">
                   <Nav>
-                     <Nav.Link>Newsfeed</Nav.Link>
-                     <Nav.Link>Watch</Nav.Link>
-                     <Nav.Link>Marketplace</Nav.Link>
-                     <Nav.Link>Groups</Nav.Link>
-                     <Nav.Link>Gaming</Nav.Link>
+                     <HeaderIcons className="px-5"><AiOutlineHome size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons className="px-5"><FaTv size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons className="px-5"><AiFillShop size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons className="px-5"><RiGroupLine size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons className="px-5"><RiGamepadLine size={headerIconSize} /></HeaderIcons>
                   </Nav>
                </Navbar.Collapse>
             </Container>
