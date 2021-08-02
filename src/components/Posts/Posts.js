@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import moment from 'moment'
 import { FaRegThumbsUp, FaRegCommentDots, FaEllipsisH } from 'react-icons/fa'
 
-const PostButton = styled.button`
+const PostButton = styled.a`
    background-color: white;
    color: #3f3f3f;
    border: none;
@@ -38,13 +38,13 @@ const PostTemplate = ({ post, createdAt }) => {
 }
 
 const Posts = ({posts}) => {
-   const PostSet = posts.map((el, idx) => (
+   const PostSet = posts.length ? posts.map((el, idx) => (
       <PostTemplate key={idx} post={el.post} createdAt={el.createdAt} />
-   ))
+   )).reverse() : 'No posts yet'
 
    return (
       <div>
-         {PostSet.reverse()}
+         {PostSet}
       </div>
    );
 }
