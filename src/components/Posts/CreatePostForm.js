@@ -10,7 +10,7 @@ const CreatePostForm = ({handleSubmit}) => {
    return (
          <Form onSubmit={formSubmit}>
             <Form.Control ref={postRef} as="textarea" placeholder="What's on your mind?" style={{resize: 'none'}} />
-            <button className="btn btn-primary my-1">Post</button>
+            <button className="btn btn-primary my-1 w-100">Post</button>
          </Form>
    );
 }

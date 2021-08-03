@@ -48,7 +48,6 @@ const Login = () => {
       setLoading(false)
    }
    return (
-      
       <>
       {!currentUser ? (
          <Container>

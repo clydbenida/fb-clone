@@ -9,8 +9,7 @@ import httpClient from '../lib/httpClient'
 
 
 const Newsfeed = () => {
-   const { currentUser } = useAuth()
-   const currentDate = new Date()
+   const { currentUser, userData } = useAuth()
    const [ posts, setPosts ] = useState([])
    const [ showSuccess, setShowSuccess ] = useState(false)
 
@@ -25,8 +24,13 @@ const Newsfeed = () => {
 
    const handleSubmit = async (postRef) => {
       try {
-         console.log(currentUser)
-         await httpClient.post("/post/create", {post: postRef.current.value, createdAt: currentDate.toString(), author: currentUser})
+         await httpClient.post("/post/create", {
+            post: postRef.current.value, 
+            createdAt: new Date().toString(), 
+            author: {
+               uid: currentUser.uid,
+               ...userData
+            }})
          postRef.current.value = ""
          setShowSuccess(!showSuccess)
       } catch (err) {

@@ -31,16 +31,9 @@ const HeaderIcons = styled(Nav.Link)`
 
 
 const HeaderNav = () => {
-   const { currentUser, logout } = useAuth()
+   const { logout, userData } = useAuth()
    const [ error, setError ] = useState('')
-   const [ email, setEmail ] = useState('')
    const history = useHistory()
-   useEffect(() => {
-      if (currentUser?.email)
-         return setEmail(currentUser.email)
-      else
-         return setEmail('No user')
-   }, [currentUser])
 
    const handleLogout = async (e) => {
       try {
@@ -77,7 +70,7 @@ const HeaderNav = () => {
             </Container>
          </CustomNavbar>
          <Nav className="d-flex flex-row justify-content-between position-fixed top-0 end-0 py-2" style={{zIndex: 6}}>
-            <Nav.Link>{email}</Nav.Link>
+            <Nav.Link>{`${userData?.name?.firstName} ${userData?.name?.lastName}`}</Nav.Link>
             <Nav.Link onClick={handleLogout}>Log out</Nav.Link>
          </Nav>
          {error && (<Alert variant="danger">{error}</Alert>)}

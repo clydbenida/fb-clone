@@ -1,12 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { Form, Modal, Alert } from 'react-bootstrap'
+import { Form, Modal, Alert, Row, Col } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import httpClient from '../../lib/httpClient'
 
 const SignUpModal = ({show, handleClose}) => {
    const emailRef = useRef()
    const passwordRef = useRef()
    const confirmPasswordRef = useRef()
-   const { signup } = useAuth()
+   const firstNameRef = useRef()
+   const lastNameRef = useRef()
+   const { signup, updateUser } = useAuth()
    const [ error, setError ] = useState('')
    const [ loading, setLoading ] = useState(false)
    const handleSubmit = async (e) => {
@@ -19,9 +23,17 @@ const SignUpModal = ({show, handleClose}) => {
       try {
          setError('')
          setLoading(true)
-         await signup(emailRef.current.value, passwordRef.current.value)
+         await httpClient.post('/user/create', {
+            email: emailRef.current.value, 
+            password: passwordRef.current.value, 
+            name: {
+               firstName: firstNameRef.current.value,
+               lastName: lastNameRef.current.value
+            }
+         })
       } catch (e) {
          setError("Failed to create an account")
+         console.log(e)
       }
       setLoading(false)
    }
@@ -40,6 +52,18 @@ const SignUpModal = ({show, handleClose}) => {
          <Modal.Body>
             {error ? (<Alert variant='danger'>{error}</Alert>) : null}
             <Form onSubmit={handleSubmit}>
+               <Row className="mb-3">
+                  <Col>
+                     <Form.Group>
+                        <input ref={firstNameRef} type="text" placeholder="First Name" className="form-control" />
+                     </Form.Group>
+                  </Col>
+                  <Col>
+                     <Form.Group>
+                        <input ref={lastNameRef} type="text" placeholder="Last Name" className="form-control" />
+                     </Form.Group>
+                  </Col>
+               </Row>
                <Form.Group className="mb-3">
                   <input ref={emailRef} type="text" className="form-control" placeholder="Email" />
                </Form.Group>

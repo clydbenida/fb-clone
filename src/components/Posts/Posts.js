@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import moment from 'moment'
 import { FaRegThumbsUp, FaRegCommentDots, FaEllipsisH } from 'react-icons/fa'
 
+import EggHead from '../../assets/egg.jpg'
+
 const PostButton = styled.a`
    background-color: white;
    color: #3f3f3f;
@@ -21,10 +23,13 @@ const PostButton = styled.a`
    }
 `
 
-const PostTemplate = ({ post, createdAt }) => {
+const PostTemplate = ({ post, createdAt, author }) => {
    return (
       <div className="post-card mb-4 p-3">
-         <h5 className="my-0">name</h5>
+         <h6 className="my-0 d-flex align-items-center">
+            <img src={EggHead} className="img-fluid d-inline-block me-2" width="40" />
+            {`${author?.name?.firstName} ${author?.name?.lastName}`}
+         </h6>
          <small className="text-muted">{`${moment(createdAt).fromNow()}`}</small>
          <p>{post}</p>
          <hr className="m-0" />
@@ -38,8 +43,9 @@ const PostTemplate = ({ post, createdAt }) => {
 }
 
 const Posts = ({posts}) => {
+
    const PostSet = posts.length ? posts.map((el, idx) => (
-      <PostTemplate key={idx} post={el.post} createdAt={el.createdAt} />
+      <PostTemplate key={idx} post={el.post} createdAt={el.createdAt} author={el.author} />
    )).reverse() : 'No posts yet'
 
    return (
