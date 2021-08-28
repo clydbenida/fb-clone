@@ -4,7 +4,7 @@ import { AiOutlineHome, AiFillShop } from 'react-icons/ai'
 import { FaTv } from 'react-icons/fa'
 import { RiGamepadLine, RiGroupLine } from 'react-icons/ri'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 import { useAuth } from '../context/AuthContext'
 import fbLogoBadge from '../assets/fb-logo-badge.svg'
@@ -22,7 +22,7 @@ const SearchBox = styled(Form.Control)`
    background-color: #f1f1f1;
 `
 
-const HeaderIcons = styled(Nav.Link)`
+const HeaderIcons = styled(Link)`
    border-radius: .25em;
    :hover {
       background-color: #efefef;
@@ -30,8 +30,8 @@ const HeaderIcons = styled(Nav.Link)`
 `
 
 
-const HeaderNav = () => {
-   const { logout, userData } = useAuth()
+const HeaderNav = ({ url }) => {
+   const { logout, userData, currentUser } = useAuth()
    const [ error, setError ] = useState('')
    const history = useHistory()
 
@@ -56,21 +56,21 @@ const HeaderNav = () => {
             </Form>
             <Navbar.Toggle aria-controls="basic-navbar-nav" /> 
          </nav>
-         <CustomNavbar expand="lg" className="py-0 position-fixed w-100 py-1 mb-5">
+         <CustomNavbar expand="lg" fixed='top' className="py-0 w-100 py-1 mb-5" style={{zIndex: 5}}>
             <Container fluid className="justify-content-between align-items-center">
                <Navbar.Collapse id="basic-navbar-nav" className="flex-grow-0 my-0 mx-auto">
                   <Nav>
-                     <HeaderIcons className="px-5"><AiOutlineHome size={headerIconSize} /></HeaderIcons>
-                     <HeaderIcons className="px-5"><FaTv size={headerIconSize} /></HeaderIcons>
-                     <HeaderIcons className="px-5"><AiFillShop size={headerIconSize} /></HeaderIcons>
-                     <HeaderIcons className="px-5"><RiGroupLine size={headerIconSize} /></HeaderIcons>
-                     <HeaderIcons className="px-5"><RiGamepadLine size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons to="/" className="nav-link px-5"><AiOutlineHome size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons className="nav-link px-5"><FaTv size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons className="nav-link px-5"><AiFillShop size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons className="nav-link px-5"><RiGroupLine size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons className="nav-link px-5"><RiGamepadLine size={headerIconSize} /></HeaderIcons>
                   </Nav>
                </Navbar.Collapse>
             </Container>
          </CustomNavbar>
          <Nav className="d-flex flex-row justify-content-between position-fixed top-0 end-0 py-2" style={{zIndex: 6}}>
-            <Nav.Link>{`${userData?.name?.firstName} ${userData?.name?.lastName}`}</Nav.Link>
+            <Link className="nav-link" to={`/user/${userData?.uid}`}>{`${userData?.name?.firstName} ${userData?.name?.lastName}`}</Link>
             <Nav.Link onClick={handleLogout}>Log out</Nav.Link>
          </Nav>
          {error && (<Alert variant="danger">{error}</Alert>)}

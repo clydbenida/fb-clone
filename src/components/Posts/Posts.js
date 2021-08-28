@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import moment from 'moment'
 import { FaRegThumbsUp, FaRegCommentDots, FaEllipsisH } from 'react-icons/fa'
@@ -23,12 +24,12 @@ const PostButton = styled.a`
    }
 `
 
-const PostTemplate = ({ post, createdAt, author }) => {
+export const PostTemplate = ({ post, createdAt, author }) => {
    return (
       <div className="post-card mb-4 p-3">
          <h6 className="my-0 d-flex align-items-center">
             <img src={EggHead} className="img-fluid d-inline-block me-2" width="40" />
-            {`${author?.name?.firstName} ${author?.name?.lastName}`}
+            <Link to={`/user/${author.uid}`}>{`${author?.name?.firstName} ${author?.name?.lastName}`}</Link>
          </h6>
          <small className="text-muted">{`${moment(createdAt).fromNow()}`}</small>
          <p>{post}</p>

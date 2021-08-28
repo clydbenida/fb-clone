@@ -1,12 +1,10 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react'
-import { Container, Row, Col, Form } from 'react-bootstrap'
+import React, { useEffect, useState} from 'react'
+import { Container } from 'react-bootstrap'
 
-import HeaderNav from './HeaderNav'
-import Posts from './Posts/Posts'
 import CreatePostForm from './Posts/CreatePostForm'
+import Posts from './Posts/Posts'
 import { useAuth } from '../context/AuthContext'
 import httpClient from '../lib/httpClient'
-
 
 const Newsfeed = () => {
    const { currentUser, userData } = useAuth()
@@ -37,23 +35,13 @@ const Newsfeed = () => {
          console.log(err)
       }
    }
-
    return (
       <>
-      <HeaderNav />
-      <main className="container-fluid pt-5" >
-         <Row className="mt-4">
-            <Col />
-            <Col md={5}>
-               <CreatePostForm handleSubmit={handleSubmit} />
-               <hr />
-               <Container>
-                  <Posts posts={posts} />
-               </Container>
-            </Col>
-            <Col />
-         </Row>
-      </main>
+         <CreatePostForm handleSubmit={handleSubmit} />
+         <hr />
+         <Container>
+            <Posts posts={posts} />
+         </Container>
       </>
    );
 }

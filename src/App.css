@@ -8,6 +8,11 @@
 
 body {
    background-color: #f4f4fa;
+   margin-top: 1rem;
+}
+
+a {
+   text-decoration: none;
 }
 
 .form-control {
