@@ -61,9 +61,9 @@ const HeaderNav = ({ url }) => {
                <Navbar.Collapse id="basic-navbar-nav" className="flex-grow-0 my-0 mx-auto">
                   <Nav>
                      <HeaderIcons to="/" className="nav-link px-5"><AiOutlineHome size={headerIconSize} /></HeaderIcons>
-                     <HeaderIcons className="nav-link px-5"><FaTv size={headerIconSize} /></HeaderIcons>
-                     <HeaderIcons className="nav-link px-5"><AiFillShop size={headerIconSize} /></HeaderIcons>
-                     <HeaderIcons className="nav-link px-5"><RiGroupLine size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons to="/watch" className="nav-link px-5"><FaTv size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons to="/market" className="nav-link px-5"><AiFillShop size={headerIconSize} /></HeaderIcons>
+                     <HeaderIcons to="/groups" className="nav-link px-5"><RiGroupLine size={headerIconSize} /></HeaderIcons>
                      <HeaderIcons className="nav-link px-5"><RiGamepadLine size={headerIconSize} /></HeaderIcons>
                   </Nav>
                </Navbar.Collapse>

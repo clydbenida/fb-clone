@@ -11,7 +11,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({children}) => {
    const [ currentUser, setCurrentUser ] = useState({})
-   const [ userData, setUserData] = useState({})
+   const [ userData, setUserData] = useState({loading: true})
    const [ loading, setLoading ] = useState(true)
    const [ authToken, setAuthToken ] = useState('')
 
@@ -33,7 +33,7 @@ export const AuthProvider = ({children}) => {
 
    const getUserData = (uid) => {
       httpClient.get(`/user/${uid}`).then(data => {
-         setUserData(data.data)
+         setUserData({...data.data, loading: false})
       })
    }
 

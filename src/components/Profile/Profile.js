@@ -40,8 +40,10 @@ const Profile = () => {
                   <p>Sample Bio should be markdown</p>
                </div>
                <Row>
-                  <Col></Col>
-                  <Col>{PostLists}</Col>
+                  <Col md={3}>
+                     <h1>FriendList</h1> 
+                  </Col>
+                  <Col md={9}>{PostLists}</Col>
                </Row>
             </>
          ))}
