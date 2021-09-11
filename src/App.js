@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+import './bootstrap-overrides.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Login from './components/Authentication/Login'

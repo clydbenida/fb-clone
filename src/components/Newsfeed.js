@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import { Container } from 'react-bootstrap'
 
-import CreatePostForm from './Posts/CreatePostForm'
+import CreatePost from './Posts/CreatePostForm'
 import Posts from './Posts/Posts'
 import { useAuth } from '../context/AuthContext'
 import httpClient from '../lib/httpClient'
@@ -37,7 +37,7 @@ const Newsfeed = () => {
    }
    return (
       <>
-         <CreatePostForm handleSubmit={handleSubmit} />
+         <CreatePost handleSubmit={handleSubmit} />
          <hr />
          <Container>
             <Posts posts={posts} />
